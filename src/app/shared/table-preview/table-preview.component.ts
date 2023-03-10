@@ -16,5 +16,6 @@ export class TablePreviewComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.dataSource = new MatTableDataSource(this.data);
+    console.log('Table preview data:', this.data);
   }
 }

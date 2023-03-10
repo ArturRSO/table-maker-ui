@@ -10,28 +10,34 @@
         (ngSubmit)="onSubmit()"
         class="min-w-150 max-w-500 w-full"
       >
-        <div class="w-full">
-          <mat-form-field class="w-full">
-            <mat-label>Column name</mat-label>
-            <input matInput type="text" [formControl]="f.columnName" />
-            <mat-error
-              *ngIf="
-                submitted && form.invalid && f.columnName.hasError('required')
-              "
-            >
-              Please type a name
-            </mat-error>
-          </mat-form-field>
-        </div>
+        <ng-container *ngFor="let header of tableHeaders">
+          <div class="w-full">
+            <mat-form-field class="w-full">
+              <mat-label>{{ header }}</mat-label>
+              <input
+                matInput
+                type="text"
+                [formControl]="getFormControl(header)"
+              />
+              <mat-error
+                *ngIf="
+                  submitted && form.invalid && f[header].hasError('required')
+                "
+              >
+                Please type a name
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </ng-container>
         <mat-card-actions>
           <button mat-raised-button color="primary" type="submit">Add</button>
           <button
             mat-raised-button
             color="primary"
             type="button"
-            (click)="saveHeadersAndProceed()"
+            (click)="convertToMarkdown()"
           >
-            Continue
+            Convert to markdown
           </button>
         </mat-card-actions>
       </form>

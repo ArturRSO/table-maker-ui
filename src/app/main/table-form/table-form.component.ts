@@ -5,6 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SessionStorageService } from 'src/app/core/services/session-storage.service';
 
 @Component({
   selector: 'app-table-form',
@@ -17,7 +19,11 @@ export class TableFormComponent {
   public tableData: Array<any> = [];
   public tableHeaders: Array<string> = [];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private sessionStorage: SessionStorageService
+  ) {
     this.form = this.formBuilder.group<TableForm>({
       columnName: new FormControl('', [Validators.required]),
     });
@@ -27,7 +33,7 @@ export class TableFormComponent {
     return this.form.controls;
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
 
     if (this.form.valid) {
@@ -49,7 +55,12 @@ export class TableFormComponent {
       this.submitted = false;
     }
 
-    console.log('Current data:', this.tableData);
+    console.log('Current headers:', this.tableHeaders);
+  }
+
+  public saveHeadersAndProceed(): void {
+    this.sessionStorage.setObject('tableHeaders', this.tableHeaders);
+    this.router.navigateByUrl('main/data-input');
   }
 }
 
