@@ -12,14 +12,14 @@ import {
   styleUrls: ['./table-form.component.scss'],
 })
 export class TableFormComponent {
-  public submitted = false;
-
   public form: FormGroup<TableForm>;
+  public submitted = false;
+  public tableData: Array<any> = [];
+  public tableHeaders: Array<string> = [];
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group<TableForm>({
-      label: new FormControl('', [Validators.required]),
-      value: new FormControl('', [Validators.required]),
+      columnName: new FormControl('', [Validators.required]),
     });
   }
 
@@ -30,11 +30,29 @@ export class TableFormComponent {
   public onSubmit() {
     this.submitted = true;
 
-    console.log(this.form.value);
+    if (this.form.valid) {
+      this.tableHeaders.push(String(this.f.columnName.value));
+      if (this.tableData.length > 0) {
+        let tableObj: any = {};
+
+        for (let header of this.tableHeaders) {
+          tableObj[header] = 'Lorem Ipsun';
+        }
+        this.tableData[0] = tableObj;
+      } else {
+        this.tableData.push({
+          [String(this.f.columnName.value)]: 'Lorem Ipsun',
+        });
+      }
+
+      this.form.reset();
+      this.submitted = false;
+    }
+
+    console.log('Current data:', this.tableData);
   }
 }
 
 interface TableForm {
-  label: FormControl<string | null>;
-  value: FormControl<string | null>;
+  columnName: FormControl<string | null>;
 }

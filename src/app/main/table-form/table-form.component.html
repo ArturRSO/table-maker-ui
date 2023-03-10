@@ -1,7 +1,8 @@
 <div class="container mx-auto max-w-md mt-3">
+  <h1 class="text-white">Build your table!</h1>
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Table form</mat-card-title>
+      <mat-card-title class="text-white">Add columns</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form
@@ -11,32 +12,28 @@
       >
         <div class="w-full">
           <mat-form-field class="w-full">
-            <mat-label>Label</mat-label>
-            <input matInput type="text" [formControl]="f.label" />
+            <mat-label>Column name</mat-label>
+            <input matInput type="text" [formControl]="f.columnName" />
             <mat-error
-              *ngIf="submitted && form.invalid && f.label.hasError('required')"
+              *ngIf="
+                submitted && form.invalid && f.columnName.hasError('required')
+              "
             >
-              Please type a label
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="w-full">
-          <mat-form-field class="w-full">
-            <mat-label>Value</mat-label>
-            <input matInput type="text" [formControl]="f.value" />
-            <mat-error
-              *ngIf="submitted && form.invalid && f.value.hasError('required')"
-            >
-              Please type a value
+              Please type a name
             </mat-error>
           </mat-form-field>
         </div>
         <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit">
-            Submit
-          </button>
+          <button mat-raised-button color="primary" type="submit">Add</button>
         </mat-card-actions>
       </form>
     </mat-card-content>
   </mat-card>
+  <div class="p-2">
+    <h2 class="text-white">Table preview</h2>
+    <app-table-preview
+      [data]="tableData"
+      [headers]="tableHeaders"
+    ></app-table-preview>
+  </div>
 </div>
