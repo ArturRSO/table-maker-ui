@@ -11,10 +11,16 @@ import { SharedModule } from '../shared/shared.module';
 import { DataInputFormComponent } from './data-input-form/data-input-form.component';
 import { HomeComponent } from './home/home.component';
 import { MainRoutingModule } from './main-routing.module';
+import { MarkdownImportComponent } from './markdown-import/markdown-import.component';
 import { TableFormComponent } from './table-form/table-form.component';
 
 @NgModule({
-  declarations: [DataInputFormComponent, HomeComponent, TableFormComponent],
+  declarations: [
+    DataInputFormComponent,
+    HomeComponent,
+    TableFormComponent,
+    MarkdownImportComponent,
+  ],
   imports: [
     CommonModule,
     ClipboardModule,

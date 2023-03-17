@@ -1,0 +1,47 @@
+<div class="container mx-auto max-w-md mt-3">
+  <h1 class="text-white">Import your markdown table!</h1>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="text-white">Paste your table here</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        class="min-w-150 max-w-500 w-full"
+      >
+        <div class="w-full">
+          <mat-form-field class="w-full">
+            <textarea
+              matInput
+              type="text"
+              placeholder="Insert your markdown table"
+              [formControl]="f.markdownTable"
+            ></textarea>
+            <mat-error
+              *ngIf="
+                submitted &&
+                form.invalid &&
+                f.markdownTable.hasError('required')
+              "
+            >
+              Please type or paste your markdown table
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit">
+            Import
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <div class="p-2">
+    <h2 class="text-white">Table preview</h2>
+    <app-table-preview
+      [data]="tableData"
+      [headers]="tableHeaders"
+    ></app-table-preview>
+  </div>
+</div>
