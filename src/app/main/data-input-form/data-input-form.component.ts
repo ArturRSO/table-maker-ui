@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { MarkdownService } from 'src/app/core/services/markdown.service';
 import { SessionStorageService } from 'src/app/core/services/session-storage.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-data-input-form',
@@ -20,6 +21,8 @@ export class DataInputFormComponent {
   public data: Array<any> = [];
   public tableData: Array<any> = [];
   public tableHeaders: Array<string> = [];
+
+  private fileName = 'excel-export.xlsx';
 
   constructor(
     private clipboard: Clipboard,
@@ -49,7 +52,16 @@ export class DataInputFormComponent {
     return formGroups;
   }
 
-  public convertToMarkdown(): void {
+  public exportToExcel(): void {
+    const element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, this.fileName);
+  }
+
+  public exportToMarkdown(): void {
     const markdownTable = this.markdownService.convertToMarkdownTable(
       this.tableHeaders,
       this.data
@@ -65,7 +77,6 @@ export class DataInputFormComponent {
       this.tableData = [...this.data];
       this.form.reset();
       this.submitted = false;
-      console.log('Table row:', this.form.value);
     }
   }
 }

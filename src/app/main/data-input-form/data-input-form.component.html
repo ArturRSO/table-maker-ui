@@ -35,9 +35,17 @@
             mat-raised-button
             color="primary"
             type="button"
-            (click)="convertToMarkdown()"
+            (click)="exportToMarkdown()"
           >
-            Convert to markdown
+            Export to markdown
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="exportToExcel()"
+          >
+            Export to excel
           </button>
         </mat-card-actions>
       </form>
@@ -49,5 +57,15 @@
       [data]="tableData"
       [headers]="tableHeaders"
     ></app-table-preview>
+  </div>
+  <div class="hidden">
+    <table id="excel-table">
+      <tr>
+        <th *ngFor="let header of tableHeaders">{{ header }}</th>
+      </tr>
+      <tr *ngFor="let item of tableData">
+        <td *ngFor="let header of tableHeaders">{{ item[header] }}</td>
+      </tr>
+    </table>
   </div>
 </div>
