@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { MainRoutingModule } from './main-routing.module';
 import { MarkdownImportComponent } from './markdown-import/markdown-import.component';
 import { TableFormComponent } from './table-form/table-form.component';
+import { ExcelImportComponent } from './excel-import/excel-import.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TableFormComponent } from './table-form/table-form.component';
     HomeComponent,
     TableFormComponent,
     MarkdownImportComponent,
+    ExcelImportComponent,
   ],
   imports: [
     CommonModule,

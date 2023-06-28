@@ -1,0 +1,28 @@
+<div class="container mx-auto max-w-md mt-3">
+  <h1 class="text-white">Import your excel table!</h1>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="text-white">Upload your table here</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input
+        #fileInput
+        hidden="true"
+        type="file"
+        onclick="this.value=null"
+        (change)="onFileChange($event)"
+        accept=".xlsx"
+      />
+      <button mat-raised-button color="primary" (click)="fileInput.click()">
+        Click to upload Excel spreadsheet
+      </button>
+    </mat-card-content>
+  </mat-card>
+  <div class="p-2">
+    <h2 class="text-white">Table preview</h2>
+    <app-table-preview
+      [data]="tableData"
+      [headers]="tableHeaders"
+    ></app-table-preview>
+  </div>
+</div>

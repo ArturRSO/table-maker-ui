@@ -4,6 +4,7 @@ import { DataInputFormComponent } from './data-input-form/data-input-form.compon
 import { HomeComponent } from './home/home.component';
 import { MarkdownImportComponent } from './markdown-import/markdown-import.component';
 import { TableFormComponent } from './table-form/table-form.component';
+import { ExcelImportComponent } from './excel-import/excel-import.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'import-excel',
+    component: ExcelImportComponent,
   },
   {
     path: 'import-markdown',
